@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      background: rgba(206, 182, 182, 0.637);
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+    .a {
+      position: relative;
+      width: 650px;
+      display: flex;
+      justify-content: space-evenly;
+    }
+    .b {
+      width: 400px;
+      height: 500px;
+      transition: 0.4s;
+      background-size: cover;
+    }
+    .c {
+      width: 200px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+    }
+    .d {
+      position: relative;
+      width: 200px;
+      height: 90px;
+      right: 0;
+      transition: 0.5s;
+      overflow: hidden;
+    }
+    .d img {
+      position: absolute;
+      width: 200px;
+      transform: translate(0, -50px);
+      transition: 0.5s;
+      right: 0;
+    }
+    .d.dd {
+      opacity: 0;
+      right: 250px;
+    }
+    .d:hover img {
+      opacity: 0;
+      right: 250px;
+    }
+  </style>
+  <body>
+    <div class="a">
+      <div class="b"></div>
+      <div class="c">
+        <div class="d dd"><img src="1.jpg" alt="" /></div>
+        <div class="d"><img src="2.jpg" alt="" /></div>
+        <div class="d"><img src="3.jpg" alt="" /></div>
+        <div class="d"><img src="4.jpg" alt="" /></div>
+        <div class="d"><img src="5.jpg" alt="" /></div>
+      </div>
+    </div>
+    <script>
+      let b = document.querySelector(".b");
+      let d = document.getElementsByClassName("d");
+      let time;
+      let index = 0;
+      let a = function () {
+        for (let i = 0; i < d.length; i++) {
+          d[i].className = "d";
+        }
+      };
+      let aa = function () {
+        a();
+        d[index].className = "d dd";
+      };
+      function ts() {
+        time = setInterval(function () {
+          aa();
+          index++;
+          b.style.backgroundImage = "url('" + [index] + ".jpg')";
+          if (index === 5) {
+            index = 0;
+          }
+        }, 1500);
+      }
+      for (let i = 0; i < d.length; i++) {
+        d[i].onmousemove = function () {
+          b.style.backgroundImage = "url('" + [i + 1] + ".jpg')";
+          a();
+          clearInterval(time);
+          index = i + 1;
+          ts();
+        };
+      }
+      ts();
+    </script>
+  </body>
+</html>
